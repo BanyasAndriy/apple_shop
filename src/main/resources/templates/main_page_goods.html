@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/main_page_goods.css">
+    <link rel="stylesheet" href="../static/css/main_page_goods_add.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+
+</head>
+<body>
+<section id="header" style="background: grey ">
+    <div class="container">
+        <div class="main-header">
+            <div class="carting">
+                <ul>
+                    <li  sec:authorize="isAnonymous()"><a href="/login"> LOGIN</a></li>
+                    <li   sec:authorize="isAuthenticated()"  ><a href="/logout"> EXIT</a></li>
+                </ul>
+            </div>
+            <div class="logo">
+                <h3><a href="index.html"><img src="./img/11.png" style="    max-width: 5em;"></a></h3>
+            </div>
+            <div class="box_1" sec:authorize="isAuthenticated()">
+
+                <a href="cart.html"><h3>Cart: <span class="simpleCart_total"></span> (<span th:text=${basket} >  </span> items)<img src="img/cart.png" alt=""/></h3></a>
+                <p><a href="javascript:;" class="simpleCart_empty">empty cart</a></p>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+
+
+        <ul id="list">
+            <li>IPHONE
+                <ul>
+                    <li>IPHONE 3</li>
+                    <li>IPHONE 4/4s</li>
+                    <li>IPHONE 5/5s</li>
+                    <li>IPHONE 6/6s/6s Plus</li>
+                    <li>IPHONE 7/7 Plus</li>
+                    <li>IPHONE 8/8 Plus</li>
+                    <li>IPHONE X/X Pro</li>
+                    <li>IPHONE 11/11 Pro</li>
+                </ul>
+            </li>
+
+            <li>WATCH
+                <ul>
+                    <li>Series 1</li>
+                    <li>Series 2</li>
+                    <li>Series 3</li>
+                    <li>Series 4</li>
+                    <li>Series 5</li>
+                </ul>
+            </li>
+            <li>POTS
+                <ul>
+                    <li>Series 1</li>
+                    <li>Series 2</li>
+                    <li>Series Pro</li>
+
+                </ul>
+            </li>
+
+            <li>LAPTOP
+                <ul>
+                    <li>MacBook Air</li>
+                    <li>MacBook Pro 13</li>
+                    <li>MacBook Pro 16</li>
+                </ul>
+            </li>
+            <li  sec:authorize="hasRole('ROLE_ADMIN')">ADMIN
+                <ul>
+                    <li  > <a href="/add_goods">ADD GOODS </a></li>
+
+                </ul>
+            </li>
+
+
+
+        </ul>
+
+    </div>
+
+</section>
+
+
+
+
+<section id="service">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block-top">
+                    <div class="service-header">
+                        <h1>Apple AirPods Pro</h1>
+                        <p>New design and active noise canceling function for immersive sound.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block-bottom">
+                    <div class="service-tab">
+
+                        <ul class="badhon-tab" role="tablist">
+                            <li class="active"><a  aria-controls="" role="" data-toggle="">
+                                <i class="fa fa-heart-o"></i>
+                                <img src="img/Pro.png" style="height: 50px;">
+
+                            </a></li>
+                            <li><a  aria-controls="profile" role="tab" data-toggle="tab">
+                                <i class="fa fa-briefcase"></i>
+                                <img src="img/pro1.png" style="height: 50px;">
+                            </a></li>
+                            <li><a  aria-controls="messages" role="tab" data-toggle="tab">
+                                <i class="fa fa-leaf"></i>
+                                <img src="img/pro2.png" style="height: 50px;">
+
+
+                            </a></li>
+                            <li><a  aria-controls="settings" role="tab" data-toggle="tab">
+                                <i class="fa fa-briefcase"></i>
+
+                                <img src="img/pro3.png"  style="height: 50px;">
+                            </a></li>
+
+
+
+
+                        </ul>
+
+
+                        <div class="tab-content edit-tab-content">
+                            <div class="tab-pane active edit-tab" id="home">
+
+                                <img src="img/Pro.png" class="img" >
+                                <p>100$</p>
+                                <div class="lox">
+                                    <button type="button" class="btn btn-default edit-button-2"><span>BUY NOW</span> </button>
+                                    <button type="button" class="btn btn-default edit-button-2"><span>ADD</span> </button>
+                                </div>
+                            </div>
+                            <div>
+
+                                <p id="shortDescription">...</p>
+                                <p>банясиииииииииииииииииииииии</p>
+                                <p>банясиииииииииииииииииииииии</p>
+                                <p>банясиииииииииииииииииииииии</p>
+                                <p>банясиииииииииииииииииииииии</p>
+                            </div>
+
+
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="submit-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <div class="submit-contant">
+                        <div class="submit-header">
+                            <i class="fa fa-envelope-o"></i>
+                            <h3>You can find other goods</h3>
+                        </div>
+                        <div class="submit-area">
+                            <div class="submit-bottom">
+                                <form action="">
+                                    <input type="text" placeholder="">
+                                    <input id="lox" type="submit" value="Find">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <div class="footer-contant">
+                        <h3>WE ARE HERE</h3>
+                        <div class="social-icon">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-tumblr"></i></a>
+                            <a href="#"><i class="fa fa-google"></i></a>
+
+                        </div>
+                        <div class="support-link">
+                            <ul>
+                                <li><a href="#">TELEGRAM</a></li>
+                                <li><a href="#">TWITTER</a></li>
+                                <li><a href="#">INSTAGRAM</a></li>
+                                <li><a href="#">VK</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script src="./js/main_page_goods.js"></script>
+
+
+</body>
+</html>
