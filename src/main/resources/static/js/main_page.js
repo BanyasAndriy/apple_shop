@@ -102,27 +102,38 @@ $(document).ready(function () {
         dataType : "json",
        // url: '/type=' +value + '/model=' +name + '',
 
-        url: '/type=watch/model=6s',
+        url: '/type=watch/model=6',
 
 
         //      data: JSON.stringify(search), // Note it is important
         success :function(response){
 
-            let select=""
-            let gfdj= [35,2,3,46,5]
-            $('#price').html(response.price+'$');
-            $('#shortDescription').html('Short Description : '+response.shortDescription);
+
+
+
+            let models = response.allModels;//список моделей
+let memories = response.allMemories;
+           console.log(memories);
+
+
+            for (var key in response.memoryAndPrice) {
+                if (response.memoryAndPrice.hasOwnProperty(key)) {
+
+                    $('#price').html(response.memoryAndPrice[key]+'$');//виводить ціну з мепа
+
+                    $('#name-model').html(response.name+ ' '+ response.model+' ' + key+"GB");//виводить память з мепа
+                }}
+
+            let select="";
+
+            $('#shortDescription').html('***');
+
             $('#fullDescription').html('Full Description :'+response.fullDescription);
             $('#model').html('Model: ' + response.model);
-            $('#name-model').html(response.name+ ' '+ response.model);
-
-            for( let i of gfdj ){
-                select+= '<button type="button" id="val" class="btn btn-success "  >'+ i+'</button>'
 
 
-
-
-
+            for( let i of models ){
+                select+= '<button type="button" id="val" class="btn btn-success "  >'+ i+'</button>';
 
             }
 
@@ -131,9 +142,30 @@ $(document).ready(function () {
             $('.memory').html(select);
             var lst = [];
             lst = document.querySelectorAll("#val");
-            for (let i in gfdj) {
-                lst[i].id = gfdj[i] ;
+            for (let i in models) {
+                lst[i].id = models[i] ;
             }
+
+
+
+            ////
+            for( let i of memories ){
+                select+= '<button type="button" id="val" class="btn btn-success "  >'+ i+'</button>';
+
+            }
+
+
+
+            $('.memory').html(select);
+            var lst = [];
+            lst = document.querySelectorAll("#val");
+            for (let i in memories) {
+                lst[i].id = memories[i] ;
+            }
+
+
+
+
         },
         error:function(response) {
             alert("smt wrong "+ response);

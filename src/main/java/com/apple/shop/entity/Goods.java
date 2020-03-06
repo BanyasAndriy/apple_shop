@@ -1,7 +1,8 @@
 package com.apple.shop.entity;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 
 @Entity
@@ -12,7 +13,7 @@ public class Goods {
     private Long id;
     private String name;
     private Long count;
-    private Long price;
+   // private Long price;
     @Column( columnDefinition="TEXT")
     private String shortDescription;
     @Column( columnDefinition="TEXT")
@@ -20,8 +21,12 @@ public class Goods {
     @Column( columnDefinition="TEXT")
     private String urlPhoto;
     private String model;
-
-
+    @ElementCollection
+    @CollectionTable(name = "memory_price",
+            joinColumns = {@JoinColumn(name = "priceID", referencedColumnName = "id")})
+    @MapKeyColumn(name = "memory")
+    @Column(name = "price")
+    private Map<Integer , Integer> memoryPrice = new TreeMap<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Order order;
@@ -29,9 +34,6 @@ public class Goods {
     @ManyToOne(cascade = CascadeType.ALL)
     private Basket basket;
 
-
-    @OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER,mappedBy = "goods")
-    List<Review> reviews ;
 
 
     @Enumerated(EnumType.STRING)
@@ -43,22 +45,21 @@ public class Goods {
     public Goods() {
     }
 
-    public Goods(String name, Long count, Long price, String shortDescription, String fullDescription, String urlPhoto, String model,Category category) {
+    public Goods(String name, Long count,  String shortDescription, String fullDescription, String urlPhoto, String model,Category category , Integer memory, Integer price) {
         this.name = name;
         this.count = count;
-        this.price = price;
         this.shortDescription = shortDescription;
         this.fullDescription = fullDescription;
         this.urlPhoto = urlPhoto;
         this.model = model;
         this.category=category;
+        this.memoryPrice.put(memory,price);
     }
 
 
-    public Goods(String name, Long count, Long price, String shortDescription, String fullDescription, String urlPhoto, String model, Order order, Category category) {
+    public Goods(String name, Long count,  String shortDescription, String fullDescription, String urlPhoto, String model, Order order, Category category) {
         this.name = name;
         this.count = count;
-        this.price = price;
         this.shortDescription = shortDescription;
         this.fullDescription = fullDescription;
         this.urlPhoto = urlPhoto;
@@ -99,13 +100,6 @@ public class Goods {
         this.basket = basket;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
 
     public Long getId() {
         return id;
@@ -123,13 +117,6 @@ public class Goods {
         this.name = name;
     }
 
-    public Long getPrice() {
-        return price;
-    }
-
-    public void setPrice(Long price) {
-        this.price = price;
-    }
 
     public String getShortDescription() {
         return shortDescription;
@@ -162,4 +149,19 @@ public class Goods {
     public void setModel(String model) {
         this.model = model;
     }
+
+    public Map<Integer, Integer> getMemoryPrice() {
+        return memoryPrice;
+    }
+
+    public void setMemoryAndPrice(Map<Integer, Integer> memoryAndPrice) {
+        this.memoryPrice.putAll(memoryAndPrice);
+    }
+
+    public void setMemoryAndPrice(Integer memory,Integer price){
+        this.memoryPrice.put(memory,price);
+    }
+
+
+
 }

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.net.Inet4Address;
+
 
 @Controller
 public class GoodsController {
@@ -51,12 +53,13 @@ public class GoodsController {
                       @RequestParam("model")String model,
                       @RequestParam("shortDescription") String shortDescription,
                       @RequestParam("fullDescription") String description,
-                      @RequestParam("price") Long price,
-                      @RequestParam("url") String urlPhoto){
+                      @RequestParam("price") Integer price,
+                      @RequestParam("url") String urlPhoto,
+                      @RequestParam("memory")Integer memory){
 
 
         ModelAndView modelAndView=new ModelAndView("add_goods");
-        Goods goods = new Goods(name,count,price,shortDescription,description,urlPhoto,model,categoryService.getCategoryByString(categoryName) );
+        Goods goods = new Goods(name,count,shortDescription,description,urlPhoto,model,categoryService.getCategoryByString(categoryName),memory,price );
 
 
         goodsService.saveGoods(goods);

@@ -2,35 +2,56 @@ package com.apple.shop.dto;
 
 import com.apple.shop.entity.Goods;
 
-import javax.persistence.Column;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class GoodsDTO {
     private String name;
     private Long count;
-    private Long price;
+    private Integer price;
     private String shortDescription;
     private String fullDescription;
     private String urlPhoto;
     private String model;
 
-    private List<String> models = new ArrayList<>();
+
+    private Set<String> allModels ;
+    private Map<Integer,Integer> memoryAndPrice=new HashMap<>();
+    private Set<Integer> allMemories;
 
 
     public GoodsDTO() {
     }
 
-    public GoodsDTO(String name, Long count, Long price, String shortDescription, String fullDescription, String urlPhoto, String model,List<String> models) {
+    public GoodsDTO(String name, Long count,  String shortDescription, String fullDescription, String urlPhoto, String model,Set<String> models,Integer price,Integer memory) {
         this.name = name;
         this.count = count;
-        this.price = price;
+
         this.shortDescription = shortDescription;
         this.fullDescription = fullDescription;
         this.urlPhoto = urlPhoto;
         this.model = model;
-        this.models=models;
+        this.allModels=models;
+        this.memoryAndPrice.put(memory,price);
     }
+
+
+    public void from(Goods goods, Set<String> models, Set<Integer> allMemories){
+
+        this.name=goods.getName();
+        this.model=goods.getModel();
+        this.fullDescription=goods.getFullDescription();
+        this.shortDescription=goods.getShortDescription();
+        this.count=goods.getCount();
+        this.urlPhoto=goods.getUrlPhoto();
+        this.memoryAndPrice=goods.getMemoryPrice();
+        this.allModels=models;
+        this.allMemories=allMemories;
+
+    }
+
 
     public String getName() {
         return name;
@@ -48,13 +69,7 @@ public class GoodsDTO {
         this.count = count;
     }
 
-    public Long getPrice() {
-        return price;
-    }
 
-    public void setPrice(Long price) {
-        this.price = price;
-    }
 
     public String getShortDescription() {
         return shortDescription;
@@ -89,32 +104,39 @@ public class GoodsDTO {
     }
 
 
-    public List<String> getModels() {
-        return models;
+    public Set<String> getModels() {
+        return allModels;
     }
 
-    public void setModels(List<String> models) {
-        this.models = models;
-    }
-
-    public void from(Goods goods){
-
-        this.name=goods.getName();
-        this.model=goods.getModel();
-        this.fullDescription=goods.getFullDescription();
-        this.shortDescription=goods.getShortDescription();
-        this.count=goods.getCount();
-        this.urlPhoto=goods.getUrlPhoto();
-        this.price = goods.getPrice();
-        //this.models=models;
-
-
+    public void setModels(Set<String> models) {
+        this.allModels = models;
     }
 
 
+    public Set<String> getAllModels() {
+        return allModels;
+    }
+
+    public void setAllModels(Set<String> allModels) {
+        this.allModels = allModels;
+    }
+
+    public Map<Integer, Integer> getMemoryAndPrice() {
+        return memoryAndPrice;
+    }
+
+    public void setMemoryAndPrice(Map<Integer, Integer> memoryAndPrice) {
+        this.memoryAndPrice = memoryAndPrice;
+    }
 
 
+    public Set<Integer> getAllMemories() {
+        return allMemories;
+    }
 
+    public void setAllMemories(Set<Integer> allMemories) {
+        this.allMemories = allMemories;
+    }
 
 
 }
