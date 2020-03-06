@@ -150,7 +150,7 @@ let memories = response.allMemories;
 
             ////
             for( let i of memories ){
-                select+= '<button type="button" id="val" class="btn btn-success "  >'+ i+'</button>';
+                select+= '<button type="button" id="mem" class="btn btn-success "  >'+ i+'</button>';
 
             }
 
@@ -158,7 +158,7 @@ let memories = response.allMemories;
 
             $('.memory').html(select);
             var lst = [];
-            lst = document.querySelectorAll("#val");
+            lst = document.querySelectorAll("#mem");
             for (let i in memories) {
                 lst[i].id = memories[i] ;
             }
