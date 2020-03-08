@@ -65,21 +65,29 @@ public class GoodsService  {
         return goodsRepository.getOne(id);
     }
 
+
+
+    @Transactional
+    public List<Goods> getGoodsByModel(String name) {
+
+        return goodsRepository.findByModel(name);
+    }
+
 @Transactional
-    public Goods getGoodsByModel(String name) {
+    public Goods getDefaultGoodsByModel(String name) {
 
          List<Goods> goods =  goodsRepository.findByModel(name);
-    List<Integer> memories = new ArrayList<>();
+         List<Integer> memories = new ArrayList<>();
 
-    Integer memory = goods.get(0).getMemoryPrice().keySet().stream().findFirst().get();
+        Integer memory = goods.get(0).getMemoryPrice().keySet().stream().findFirst().get();
 
-    for (Goods g: goods
+     for (Goods g: goods
          ) {
          memories.add(g.getMemoryPrice().keySet().stream().findFirst().get());
-    }
-    Collections.sort(memories);
+          }
+        Collections.sort(memories);
 
-    for (Goods g: goods
+     for (Goods g: goods
     ) {
        if (g.getMemoryPrice().keySet().stream().findFirst().get()==memories.get(0)){
            return g;
@@ -129,6 +137,7 @@ return goods.get(0);
         return res;
 
     }
+
 
 
 }

@@ -35,21 +35,36 @@ GoodsService goodsService;
         Set<String> models = goodsService.findByModelContains(name);
         Set<Integer> memories = goodsService.getMemoriesByModel(name);
         GoodsDTO goodsDTO= new GoodsDTO();
-        goodsDTO.from(goodsService.getGoodsByModel(name),models,memories);
+        goodsDTO.from(goodsService.getDefaultGoodsByModel(name),models,memories);
 
-        Goods goods = goodsService.getGoodsByModel(name);
+        Goods goods = goodsService.getDefaultGoodsByModel(name);
 
 
 
            Integer priceByMemory = goodsDTO.getMemoryAndPrice().get(16);
 
-
-
-
-
-
         return goodsDTO;
 
     }
+
+    @RequestMapping(value="/type={type}/model={name}/memory={memory}",method= RequestMethod.POST)
+    public String getPriceByMemory( @PathVariable("type") String type,
+                                         @PathVariable("name") String name,
+                                         @PathVariable("memory") Integer memory){
+
+      List<Goods> goods = goodsService.getGoodsByModel(name);
+      Integer price = 0;
+
+        for (Goods g:goods
+             ){
+            if (g.getMemoryPrice().get(memory)!=null){
+                price=g.getMemoryPrice().get(memory);
+            }
+        }
+        return price.toString();
+    }
+
+   
+
 
 }

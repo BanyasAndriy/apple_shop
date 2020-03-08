@@ -71,18 +71,10 @@ $(document).ready(function () {
     $('#qwe').click(function (event) {
        var name = $(this).attr("id");
        var value = $(this).val();
-  
         getWatch(name, value);
 
-
-        
     });
 });
-
-
-
-
-
 
 
 
@@ -95,7 +87,6 @@ $(document).ready(function () {
      console.log(name);
      console.log(value);
 
-
     $.ajax({
         type: "POST",
         contentType : 'application/json; charset=utf-8',
@@ -107,7 +98,6 @@ $(document).ready(function () {
 
         //      data: JSON.stringify(search), // Note it is important
         success :function(response){
-
 
 
 
@@ -138,7 +128,6 @@ let memories = response.allMemories;
             }
 
 
-
             $('.memory').html(select);
             var lst = [];
             lst = document.querySelectorAll("#val");
@@ -147,8 +136,6 @@ let memories = response.allMemories;
             }
 
 
-
-            ////
             for( let i of memories ){
                 select+= '<button type="button" id="mem" class="btn btn-success "  >'+ i+'</button>';
 
@@ -173,6 +160,8 @@ let memories = response.allMemories;
         }
     });
 }
+
+
 
 
 
