@@ -106,7 +106,13 @@ return goods.get(0);
         List<String> res = new ArrayList<>();
 
 
-        List<Goods> goods = goodsRepository.findDistinctByModelContains(model);
+String[] ch = model.split("");
+
+
+        List<Goods> goods=new ArrayList<>();
+       for (int i = 0; i <ch.length ; i++) {
+           goods.addAll( goodsRepository.findDistinctByModelContains(ch[i])) ;
+       }
 
         for (Goods g: goods
              ) {

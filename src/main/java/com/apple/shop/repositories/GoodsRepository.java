@@ -6,6 +6,7 @@ import com.apple.shop.entity.Order;
 import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,10 +25,7 @@ public interface GoodsRepository extends JpaRepository<Goods,Long> {
     Goods findTopByModelAndCategoryAndNameIgnoreCase(String model, Category category, String name);
 
 
-
-
     List<Goods> findByModel(String model);
-
 
 
     List<Goods> findAll();
@@ -38,6 +36,7 @@ public interface GoodsRepository extends JpaRepository<Goods,Long> {
 
 
     List<Goods> findDistinctByModelContains(String model);
+
 
 
 
